@@ -4,19 +4,20 @@ requires = ["poetry-core"]
 
 [project]
 authors = [{ name = "Valery Ratsko", email = "<zitrasa@yandex.ru>" }]
-description = "Baikal Template Repository"
-name = "baikal-template"
+description = "Baikal Common Utilities"
+name = "baikal-common"
 version = "0.0.0"
 readme = "README.md"
 requires-python = ">= 3.12"
 
 dependencies = [
     "dynaconf (>= 3.0, < 4.0)",
+    "rich (>= 13.0, < 14.0)"
 ]
 
 [tool.poetry]
 packages = [
-    { include = "template", from = "src", to = "baikal" }
+    { include = "common", from = "src", to = "baikal" }
 ]
 
 [tool.semantic_release]
