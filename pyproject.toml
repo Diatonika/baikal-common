@@ -47,8 +47,8 @@ python-semantic-release = "^9.0"
 rust-just = "^1.0"
 
 [tool.poetry.group.lint.dependencies]
-ruff = "^0.9"
 mypy = "^1.0"
+ruff = "^0.9"
 
 # Linter Tools
 
