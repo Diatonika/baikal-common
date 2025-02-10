@@ -20,6 +20,8 @@ packages = [
     { include = "common", from = "src", to = "baikal" }
 ]
 
+# Semantic Release Settings
+
 [tool.semantic_release]
 tag_format = "{version}"
 version_toml = ["pyproject.toml:project.version"]
@@ -36,18 +38,14 @@ match = "main"
 prerelease_token = "rc"
 prerelease = false
 
-[tool.pytest.ini_options]
-addopts = ["--import-mode=importlib", "--tb=short"]
-testpaths = ["tests"]
+# Private PyPI Source
 
 [[tool.poetry.source]]
 name = "baikal-pypi"
 priority = "explicit"
 url = "https://pypi.fury.io/zitrasa/"
 
-[tool.poetry.group.test.dependencies]
-pytest = "^8.0"
-pytest-datadir = "^1.0"
+# Dependency Groups
 
 [tool.poetry.group.dev.dependencies]
 click = "^8.0"
@@ -57,6 +55,10 @@ rust-just = "^1.0"
 [tool.poetry.group.lint.dependencies]
 mypy = "^1.0"
 ruff = "^0.9"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.0"
+pytest-datadir = "^1.0"
 
 # Linter Tools
 
@@ -80,3 +82,9 @@ strict = true
 [[tool.mypy.overrides]]
 module = "dynaconf"
 ignore_missing_imports = true
+
+# Testing Tools
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib", "--tb=short"]
+testpaths = ["tests"]
