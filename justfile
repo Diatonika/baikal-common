@@ -3,7 +3,7 @@ set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 
 # Directories for Linter & Formatter
 
-source-dirs := "src test"
+source-dirs := "src tests"
 nexus-read-user := env("NEXUS_READ_USER")
 nexus-read-pass := env("NEXUS_READ_PASS")
 
