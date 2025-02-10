@@ -7,7 +7,7 @@ from rich.theme import Theme
 
 
 class Console(RichConsole):
-    DEFAULT_THEMES = {
+    DEFAULT_THEME = {
         "error": "red3",
         "warning": "orange3",
         "info": "white",
@@ -17,12 +17,12 @@ class Console(RichConsole):
     @classmethod
     def from_dynaconf(cls, settings: LazySettings, *, install: bool = True) -> Self:
         return cls.from_parameters(
-            settings("baikal.common.rich.themes"), install=install
+            settings("baikal.common.rich.styles"), install=install
         )
 
     @classmethod
     def from_parameters(cls, styles: dict[str, str], *, install: bool = True) -> Self:
-        console = cls(theme=Theme(cls.DEFAULT_THEMES | styles))
+        console = cls(theme=Theme(cls.DEFAULT_THEME | styles))
 
         if install:
             pretty.install(console)
