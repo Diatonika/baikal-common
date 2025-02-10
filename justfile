@@ -25,6 +25,9 @@ init-lint: (init "--only" "main,lint")
 init-release: (init "--only" "main")
 
 [group("setup")]
+init-test: (init "--only" "main,test")
+
+[group("setup")]
 build: init-release
     poetry build
 
@@ -52,3 +55,7 @@ format-check: init-lint
 [group("format")]
 format-fix: init-lint
     poetry run ruff format {{ source-dirs }}
+
+[group("test")]
+test-all: init-test
+    poetry run pytest
