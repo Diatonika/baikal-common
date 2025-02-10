@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.2.1 (2025-02-10)
+
+### Bug Fixes
+
+- Change common.rich theme config to baikal.common.rich.styles
+  ([`0d35dc6`](https://github.com/Diatonika/baikal-common/commit/0d35dc69e6e56f088a9819fdc11a2dbe4305462f))
+
+
 ## v0.2.0 (2025-02-10)
 
 ### Bug Fixes
