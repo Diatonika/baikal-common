@@ -19,7 +19,7 @@ init *install-options: && (install install-options)
 init-dev: init
 
 [group("setup")]
-init-lint: (init "--only" "main,lint")
+init-lint: (init "--only" "main,lint,test")
 
 [group("setup")]
 init-release: (init "--only" "main")
