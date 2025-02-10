@@ -1,18 +1,30 @@
-from dynaconf import Dynaconf, Validator
+from typing import Self
+
+from dynaconf import LazySettings
 from rich import pretty
-from rich.console import Console
+from rich.console import Console as RichConsole
 from rich.theme import Theme
 
-SETTINGS = Dynaconf(environments=True, validators=[Validator("themes", default={})])
-THEME = Theme(
-    {
+
+class Console(RichConsole):
+    DEFAULT_THEMES = {
         "error": "red3",
         "warning": "orange3",
         "info": "white",
         "debug": "white",
     }
-    | SETTINGS("themes")
-)
 
-CONSOLE = Console(theme=THEME)
-pretty.install(CONSOLE)
+    @classmethod
+    def from_dynaconf(cls, settings: LazySettings, *, install: bool = True) -> Self:
+        return cls.from_parameters(
+            settings("baikal.common.rich.themes"), install=install
+        )
+
+    @classmethod
+    def from_parameters(cls, styles: dict[str, str], *, install: bool = True) -> Self:
+        console = cls(theme=Theme(cls.DEFAULT_THEMES | styles))
+
+        if install:
+            pretty.install(console)
+
+        return console

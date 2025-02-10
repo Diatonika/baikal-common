@@ -1,0 +1,7 @@
+[develop.baikal.common.rich.themes]
+
+develop-style = "bold green"
+
+[production.baikal.common.rich.themes]
+
+production-style = "italic red"
