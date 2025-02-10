@@ -38,9 +38,31 @@ jobs:
         if: steps.format.outcome == 'failure' || steps.lint.outcome == 'failure'
         run: exit 1
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    env:
+      NEXUS_READ_USER: ${{ secrets.NEXUS_READ_USER }}
+      NEXUS_READ_PASS: ${{ secrets.NEXUS_READ_PASS }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python ${{ vars.PYTHON_VERSION }} Environment Setup
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ vars.PYTHON_VERSION }}
+      - name: Environment Preparation
+        run: pip install "poetry >= 2.0" "rust-just >= 1.0"
+      - name: Dependencies Installation
+        run: just init-test
+      - name: Run PyTest
+        run: just test-all
+
   semantic-release:
     name: Semantic Release Bump
-    needs: [ lint ]
+    needs: [ lint, test ]
     runs-on: ubuntu-latest
 
     if: github.ref == 'refs/heads/main'
