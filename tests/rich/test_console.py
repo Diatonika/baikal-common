@@ -4,7 +4,7 @@ import pytest
 
 from dynaconf import Dynaconf
 
-from common.rich import Console
+from baikal.common.rich import Console
 
 
 def test_basic_config(datadir: Path) -> None:

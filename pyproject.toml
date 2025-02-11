@@ -16,8 +16,12 @@ dependencies = [
 ]
 
 [tool.poetry]
+exclude = [
+    "src/baikal/*.py"  # Explicitly exclude all python files from baikal namespace package
+]
+
 packages = [
-    { include = "common", from = "src", to = "baikal" }
+    { include = "baikal", from = "src" }
 ]
 
 # Semantic Release Settings
@@ -76,6 +80,8 @@ lines-between-types = 1
 
 [tool.mypy]
 exclude = [".venv"]
+explicit_package_bases = true
+mypy_path = "src"
 python_version = "3.12"
 strict = true
 

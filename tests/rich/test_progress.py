@@ -1,4 +1,4 @@
-from common.rich import Console, Progress
+from baikal.common.rich import Console, Progress
 
 
 def test_default_console() -> None:
