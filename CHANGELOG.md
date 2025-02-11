@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v0.3.0 (2025-02-11)
+
+### Features
+
+- **build**: Transit to namespace package structure
+  ([`1015175`](https://github.com/Diatonika/baikal-common/commit/10151758f70a4f9b104e6c712b25978f31a1d44c))
+
+- **docs**: Include example settings.toml into distribution
+  ([`2868d44`](https://github.com/Diatonika/baikal-common/commit/2868d4423769eb6cefecdd4688c2a534946ec6ab))
+
+
 ## v0.2.1 (2025-02-10)
 
 ### Bug Fixes
