@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.4.0 (2025-02-19)
+
+### Features
+
+- Support logger context wrapper
+  ([`22dbfa1`](https://github.com/Diatonika/baikal-common/commit/22dbfa1da3c525fc5150cf2daef0b86a2e33578a))
+
+
 ## v0.3.0 (2025-02-11)
 
 ### Features
