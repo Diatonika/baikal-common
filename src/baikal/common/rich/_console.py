@@ -30,7 +30,8 @@ class ConsoleContext:
         return cls.from_parameters(settings("baikal.common.rich.styles"))
 
     @classmethod
-    def from_parameters(cls, styles: dict[str, str]) -> Console:
+    def from_parameters(cls, styles: dict[str, str] | None = None) -> Console:
+        styles = styles if styles is not None else {}
         return Console(theme=Theme(cls._DEFAULT_THEME | styles))
 
     @classmethod
@@ -39,7 +40,7 @@ class ConsoleContext:
         return (
             active_console
             if active_console is not None
-            else ConsoleContext.from_parameters({})
+            else ConsoleContext.from_parameters()
         )
 
     def __enter__(self) -> Self:

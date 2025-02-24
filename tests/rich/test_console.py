@@ -31,7 +31,7 @@ def test_layered_config(datadir: Path, env: str, style: str) -> None:
 
 
 def test_console_print() -> None:
-    with ConsoleContext.from_parameters({}) as console:
+    with ConsoleContext.from_parameters() as console:
         console.print("[info] test_console_print [/]")
 
 

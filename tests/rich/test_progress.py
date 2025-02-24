@@ -8,7 +8,7 @@ def test_default_console() -> None:
 
 
 def test_rich_console() -> None:
-    console = ConsoleContext.from_parameters({})
+    console = ConsoleContext.from_parameters()
 
     with Progress(console) as progress:
         for _ in progress.track(range(5), total=5, description="test_rich_console"):
