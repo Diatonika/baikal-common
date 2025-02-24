@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.5.0 (2025-02-24)
+
+### Features
+
+- **rich**: Support console decorator
+  ([`be5ad58`](https://github.com/Diatonika/baikal-common/commit/be5ad5863d6a0d2f82369ed1b9066444c50d7516))
+
+
 ## v0.4.0 (2025-02-19)
 
 ### Features
