@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.6.0 (2025-02-24)
+
+### Features
+
+- **rich**: Support no-argument overload for ConsoleContext.from_parameters()
+  ([`e81cf63`](https://github.com/Diatonika/baikal-common/commit/e81cf639201aaf36f4fe2f76602c97f317b57794))
+
+
 ## v0.5.0 (2025-02-24)
 
 ### Features
