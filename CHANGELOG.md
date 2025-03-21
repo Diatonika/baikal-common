@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.7.0 (2025-03-21)
+
+### Features
+
+- **rich**: Rework rich helper interfaces
+  ([`7e74b48`](https://github.com/Diatonika/baikal-common/commit/7e74b48a64dda2ace4449264a8470c06a7caa55c))
+
+
 ## v0.6.0 (2025-02-24)
 
 ### Features
