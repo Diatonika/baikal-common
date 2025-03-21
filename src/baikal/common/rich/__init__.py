@@ -1,11 +1,15 @@
-from baikal.common.rich._console import ConsoleContext
-from baikal.common.rich._console_decorator import with_console
-from baikal.common.rich._logging import LogContext
-from baikal.common.rich._progress import Progress
+from baikal.common.rich.console_stack import RichConsoleStack
+from baikal.common.rich.console_stack_decorator import with_console
+from baikal.common.rich.console_util import console_from_dynaconf
+from baikal.common.rich.log_handler import RichLogHandler
+from baikal.common.rich.log_handler_decorator import with_handler
+from baikal.common.rich.progress import RichProgress
 
 __all__ = [
-    "ConsoleContext",
+    "RichConsoleStack",
     "with_console",
-    "LogContext",
-    "Progress",
+    "console_from_dynaconf",
+    "RichLogHandler",
+    "with_handler",
+    "RichProgress",
 ]

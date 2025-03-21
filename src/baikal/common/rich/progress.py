@@ -2,7 +2,7 @@ from rich.console import Console
 from rich.progress import (
     BarColumn,
     MofNCompleteColumn,
-    Progress as RichProgress,
+    Progress,
     TaskProgressColumn,
     TextColumn,
     TimeElapsedColumn,
@@ -10,7 +10,7 @@ from rich.progress import (
 )
 
 
-class Progress(RichProgress):
+class RichProgress(Progress):
     COLUMNS = (
         TextColumn("[progress.description]{task.description}", justify="left"),
         TextColumn("｜", justify="center"),

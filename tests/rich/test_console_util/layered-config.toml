@@ -1,0 +1,7 @@
+[develop.baikal.common.rich.console]
+
+theme = { styles = { develop-style = "bold green" } }
+
+[production.baikal.common.rich.console]
+
+theme = { styles = { production-style = "italic red" } }

@@ -1,0 +1,3 @@
+[baikal.common.rich.console]
+
+theme = { styles = { mock-style = "bold green" } }
