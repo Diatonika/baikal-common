@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.8.0 (2025-06-23)
+
+### Refactoring
+
+- **os**: Enclose file system util into separate namespace
+  ([#1](https://github.com/Diatonika/baikal-common/pull/1),
+  [`d6e8a62`](https://github.com/Diatonika/baikal-common/commit/d6e8a62ed311e4bd721d9a75d15839a3bb98bc41))
+
+
 ## v0.7.0 (2025-03-21)
 
 ### Features
