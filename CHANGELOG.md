@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.9.0 (2025-06-25)
+
+### Features
+
+- **trade**: Introduce basic time series models for trading
+  ([#2](https://github.com/Diatonika/baikal-common/pull/2),
+  [`c609618`](https://github.com/Diatonika/baikal-common/commit/c6096188d7b70c4534b51c138f4dcafaf037eaa9))
+
+* feat(trade): introduce basic time series models for trading
+
+* fix pandera warning about missing pandas
+
+
 ## v0.8.0 (2025-06-23)
 
 ### Refactoring
