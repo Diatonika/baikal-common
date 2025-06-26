@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.11.0 (2025-06-26)
+
+### Features
+
+- **trade**: Rename OHLC(V) fields and allow nullables
+  ([#4](https://github.com/Diatonika/baikal-common/pull/4),
+  [`26be5aa`](https://github.com/Diatonika/baikal-common/commit/26be5aa984a5bba41e2695d8239d85085c54ec49))
+
+
 ## v0.10.0 (2025-06-26)
 
 ### Features
