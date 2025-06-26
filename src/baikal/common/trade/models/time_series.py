@@ -8,6 +8,3 @@ from baikal.common.trade.models.trade_model import TradeModel
 
 class TimeSeries(TradeModel):
     date_time: Series[Annotated[Datetime, "us", "UTC"]]
-
-    class Config:
-        coerce = True
