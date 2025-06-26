@@ -1,6 +1,19 @@
 # CHANGELOG
 
 
+## v0.10.0 (2025-06-26)
+
+### Features
+
+- **trade**: Introduce base TradeModel utility class
+  ([#3](https://github.com/Diatonika/baikal-common/pull/3),
+  [`ba56f28`](https://github.com/Diatonika/baikal-common/commit/ba56f28a1fdd9b591e268aa923a78de019892843))
+
+* feat(trade): introduce base TradeModel utility class
+
+* move coercion config into TradeModel class
+
+
 ## v0.9.0 (2025-06-25)
 
 ### Features
