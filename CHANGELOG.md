@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.12.0 (2025-06-27)
+
+### Features
+
+- **trade**: Support TradeModel to Polars Schema conversion
+  ([#5](https://github.com/Diatonika/baikal-common/pull/5),
+  [`8476f1a`](https://github.com/Diatonika/baikal-common/commit/8476f1a6a1ef248ba578df637342903d0637cdf5))
+
+
 ## v0.11.0 (2025-06-26)
 
 ### Features
