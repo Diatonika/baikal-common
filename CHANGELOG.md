@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.13.0 (2025-06-28)
+
+### Features
+
+- **rich**: Support utilities for time-based progress reporting
+  ([#6](https://github.com/Diatonika/baikal-common/pull/6),
+  [`88855f4`](https://github.com/Diatonika/baikal-common/commit/88855f422a3b081d8d6338eda3b981e278b97577))
+
+
 ## v0.12.0 (2025-06-27)
 
 ### Features
