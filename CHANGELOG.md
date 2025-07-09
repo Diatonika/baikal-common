@@ -1,6 +1,20 @@
 # CHANGELOG
 
 
+## v0.14.0 (2025-07-09)
+
+### Features
+
+- **trade**: Make OHLCV non-nullable and present basic sequential parquet dataset TimeSeries writer
+  ([#7](https://github.com/Diatonika/baikal-common/pull/7),
+  [`0b975d0`](https://github.com/Diatonika/baikal-common/commit/0b975d07693c7064d10ca22b4b8650af7765930f))
+
+* feat(trade): make OHLCV non-nullable and present basic sequential parquet dataset TimeSeries
+  writer
+
+* return explicit polars dependency
+
+
 ## v0.13.0 (2025-06-28)
 
 ### Features
