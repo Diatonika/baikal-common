@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.14.1 (2025-07-10)
+
+### Bug Fixes
+
+- **trade**: Fix partial parquet write because of chunking
+  ([#8](https://github.com/Diatonika/baikal-common/pull/8),
+  [`0c43600`](https://github.com/Diatonika/baikal-common/commit/0c43600ad0084be33feeed4815ae29136bf6b308))
+
+
 ## v0.14.0 (2025-07-09)
 
 ### Features
