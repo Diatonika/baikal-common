@@ -58,7 +58,7 @@ class ParquetTimeSeriesWriter[M: TimeSeries]:
         if not len(frames):
             return
 
-        arrow: ArrowTable = concat(frames).to_arrow()
+        arrow: ArrowTable = concat(frames, rechunk=True).to_arrow()
         write_dataset(
             arrow,
             self._root,
