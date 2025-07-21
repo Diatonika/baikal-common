@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.14.2 (2025-07-21)
+
+### Bug Fixes
+
+- **trade**: Write explicit parquet metadata for date_time for effective polars access
+  ([#9](https://github.com/Diatonika/baikal-common/pull/9),
+  [`7f578fa`](https://github.com/Diatonika/baikal-common/commit/7f578fa996f7830b80967eee029fdc23a9fecfb9))
+
+
 ## v0.14.1 (2025-07-10)
 
 ### Bug Fixes
