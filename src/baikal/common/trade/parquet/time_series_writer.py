@@ -5,7 +5,7 @@ from typing import Any, Self
 from pandera.typing.polars import DataFrame
 from polars import concat
 from pyarrow import Table as ArrowTable
-from pyarrow.dataset import write_dataset
+from pyarrow.parquet import SortingColumn, write_to_dataset
 
 from baikal.common.trade.models import TimeSeries
 from baikal.common.trade.parquet.time_series_partition import ParquetTimeSeriesPartition
@@ -59,12 +59,19 @@ class ParquetTimeSeriesWriter[M: TimeSeries]:
             return
 
         arrow: ArrowTable = concat(frames, rechunk=True).to_arrow()
-        write_dataset(
+        sorting_order = SortingColumn.from_ordering(
+            arrow.schema,
+            [(TimeSeries.date_time, "ascending")],
+        )
+
+        write_to_dataset(
             arrow,
             self._root,
-            format="parquet",
             partitioning=list(self._partition_by),
-            partitioning_flavor="hive",
+            basename_template="part-{i}.parquet",
             schema=arrow.schema,
             existing_data_behavior="delete_matching",
+            partitioning_flavor="hive",
+            sorting_columns=sorting_order,
+            write_page_index=True,
         )
