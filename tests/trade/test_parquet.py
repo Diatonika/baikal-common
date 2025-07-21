@@ -10,6 +10,7 @@ from polars import (
     len as length,
     scan_parquet,
 )
+from pyarrow.parquet import read_metadata
 
 from baikal.common.trade.models import OHLC
 from baikal.common.trade.parquet import (
@@ -18,11 +19,7 @@ from baikal.common.trade.parquet import (
 )
 
 
-def test_parquest_time_series_writer(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter[OHLC](
-        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
-    )
-
+def _write_parquet_sample(writer: ParquetTimeSeriesWriter[OHLC]) -> None:
     with writer:
         for range_start in datetime_range(
             datetime.datetime(2020, 1, 1, tzinfo=datetime.UTC),
@@ -50,6 +47,14 @@ def test_parquest_time_series_writer(tmp_path: Path) -> None:
 
             writer.write(DataFrame[OHLC](polar_frame))
 
+
+def test_parquest_time_series_writer(tmp_path: Path) -> None:
+    writer = ParquetTimeSeriesWriter[OHLC](
+        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
+    )
+
+    _write_parquet_sample(writer)
+
     loaded = scan_parquet(tmp_path / "parquet-data", schema=OHLC.polar_schema())
 
     assert loaded.select(length()).collect().item() == 538_560
@@ -63,3 +68,24 @@ def test_parquest_time_series_writer(tmp_path: Path) -> None:
     )
 
     assert loaded.null_count().collect().sum_horizontal().item() == 0
+
+
+def test_parquet_writer_metadata(tmp_path: Path) -> None:
+    writer = ParquetTimeSeriesWriter[OHLC](
+        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
+    )
+
+    _write_parquet_sample(writer)
+
+    first_parquet = next((tmp_path / "parquet-data").rglob("**/*.parquet"))
+    statistics = read_metadata(first_parquet)
+
+    for row_group_index in range(statistics.num_row_groups):
+        row_group = statistics.row_group(row_group_index)
+
+        for column_index in range(row_group.num_columns):
+            column = row_group.column(column_index)
+            assert column.statistics is not None
+            assert column.statistics.has_min_max
+
+        assert len(row_group.sorting_columns) == 1
