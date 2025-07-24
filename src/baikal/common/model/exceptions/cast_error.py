@@ -1,0 +1,2 @@
+class CastError(Exception):
+    pass
