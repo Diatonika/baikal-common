@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.14.3 (2025-08-07)
+
+### Bug Fixes
+
+- **trade**: Support _metadata and _common_metadata for time series writer
+  ([#12](https://github.com/Diatonika/baikal-common/pull/12),
+  [`74d9f7e`](https://github.com/Diatonika/baikal-common/commit/74d9f7e4edee6c9704822f44b6553cc651a85882))
+
+
 ## v0.14.2 (2025-07-21)
 
 ### Bug Fixes
