@@ -19,7 +19,7 @@ from baikal.common.trade.parquet import (
 )
 
 
-def _write_parquet_sample(writer: ParquetTimeSeriesWriter[OHLC]) -> None:
+def _write_parquet_sample(writer: ParquetTimeSeriesWriter) -> None:
     with writer:
         for range_start in datetime_range(
             datetime.datetime(2020, 1, 1, tzinfo=datetime.UTC),
@@ -49,13 +49,17 @@ def _write_parquet_sample(writer: ParquetTimeSeriesWriter[OHLC]) -> None:
 
 
 def test_parquest_time_series_writer(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter[OHLC](
+    writer = ParquetTimeSeriesWriter(
         tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
     )
 
     _write_parquet_sample(writer)
 
-    loaded = scan_parquet(tmp_path / "parquet-data", schema=OHLC.polar_schema())
+    loaded = scan_parquet(
+        tmp_path / "parquet-data" / "**" / "*.parquet",
+        glob=True,
+        schema=OHLC.polar_schema(),
+    )
 
     assert loaded.select(length()).collect().item() == 538_560
 
@@ -71,7 +75,7 @@ def test_parquest_time_series_writer(tmp_path: Path) -> None:
 
 
 def test_parquet_writer_metadata(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter[OHLC](
+    writer = ParquetTimeSeriesWriter(
         tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
     )
 

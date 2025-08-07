@@ -1,6 +1,7 @@
 import enum
 
-from polars import Expr, col
+import polars as polar
+import pyarrow as arrow
 
 
 class ParquetTimeSeriesPartition(enum.IntEnum):
@@ -9,34 +10,41 @@ class ParquetTimeSeriesPartition(enum.IntEnum):
     DAY = 3
     HOUR = 4
 
-    def partition_by(self) -> tuple[str, ...]:
-        match self:
-            case ParquetTimeSeriesPartition.YEAR:
-                return ("__year",)
-            case ParquetTimeSeriesPartition.MONTH:
-                return "__year", "__month"
-            case ParquetTimeSeriesPartition.DAY:
-                return "__year", "__month", "__day"
-            case ParquetTimeSeriesPartition.HOUR:
-                return "__year", "__month", "__day", "__hour"
-
-        error = f"Unsupported partition type: {self}"
-        raise ValueError(error)
-
-    def partition_columns(self, date_time_column: str) -> dict[str, Expr]:
-        columns: dict[str, Expr] = {}
+    def parquet_schema(self) -> arrow.Schema:
+        fields: dict[str, arrow.DataType] = {}
 
         if self >= ParquetTimeSeriesPartition.YEAR:
-            columns["__year"] = col(date_time_column).dt.year()
+            fields["__year"] = arrow.int32()
 
         if self >= ParquetTimeSeriesPartition.MONTH:
-            columns["__month"] = col(date_time_column).dt.month()
+            fields["__month"] = arrow.int8()
 
         if self >= ParquetTimeSeriesPartition.DAY:
-            columns["__day"] = col(date_time_column).dt.day()
+            fields["__day"] = arrow.int8()
 
         if self >= ParquetTimeSeriesPartition.HOUR:
-            columns["__hour"] = col(date_time_column).dt.hour()
+            fields["__hour"] = arrow.int8()
+
+        if self > ParquetTimeSeriesPartition.HOUR:
+            error = f"Unsupported partition type: {self}"
+            raise ValueError(error)
+
+        return arrow.schema(fields)
+
+    def polar_expressions(self, date_time_column: str) -> dict[str, polar.Expr]:
+        columns: dict[str, polar.Expr] = {}
+
+        if self >= ParquetTimeSeriesPartition.YEAR:
+            columns["__year"] = polar.col(date_time_column).dt.year()
+
+        if self >= ParquetTimeSeriesPartition.MONTH:
+            columns["__month"] = polar.col(date_time_column).dt.month()
+
+        if self >= ParquetTimeSeriesPartition.DAY:
+            columns["__day"] = polar.col(date_time_column).dt.day()
+
+        if self >= ParquetTimeSeriesPartition.HOUR:
+            columns["__hour"] = polar.col(date_time_column).dt.hour()
 
         if self > ParquetTimeSeriesPartition.HOUR:
             error = f"Unsupported partition type: {self}"
