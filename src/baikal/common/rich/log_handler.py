@@ -13,7 +13,7 @@ class RichLogHandler:
 
     def __init__(self, logger: Logger, console: Console | None = None) -> None:
         self.handler = RichHandler(
-            console=console or RichConsoleStack.active_console(),
+            console=console or RichConsoleStack.active(),
             level=logger.level,
             rich_tracebacks=True,
         )

@@ -1,0 +1,2 @@
+class ParquetDatasetException(Exception):
+    pass

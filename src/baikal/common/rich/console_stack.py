@@ -17,7 +17,7 @@ class RichConsoleStack:
         self._console = console
 
     @classmethod
-    def active_console(cls) -> Console:
+    def active(cls) -> Console:
         active_console = cls._ACTIVE_CONSOLE.get()
         return active_console if active_console is not None else Console()
 
