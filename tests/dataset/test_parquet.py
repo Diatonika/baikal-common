@@ -1,62 +1,19 @@
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from pathlib import Path
 
-from pandera.typing.polars import DataFrame
 from polars import (
-    DataFrame as PolarDataFrame,
-    col,
-    datetime_range,
     len as length,
     scan_parquet,
 )
 from pyarrow.parquet import read_metadata
 
-from baikal.common.trade.models import OHLC
-from baikal.common.trade.parquet import (
-    ParquetTimeSeriesPartition,
-    ParquetTimeSeriesWriter,
-)
-
-
-def _write_parquet_sample(writer: ParquetTimeSeriesWriter) -> None:
-    with writer:
-        for range_start in datetime_range(
-            datetime(2020, 1, 1, tzinfo=UTC),
-            datetime(2021, 1, 1, tzinfo=UTC),
-            "11d",
-            closed="left",
-            eager=True,
-        ):
-            polar_frame = (
-                PolarDataFrame(
-                    {
-                        OHLC.date_time: datetime_range(
-                            range_start,
-                            range_start + timedelta(days=11),
-                            "1m",
-                            closed="left",
-                            eager=True,
-                        ),
-                    }
-                )
-                .with_columns(
-                    open=col(OHLC.date_time).dt.hour(),
-                    high=col(OHLC.date_time).dt.hour() + 1,
-                    low=col(OHLC.date_time).dt.hour() - 1,
-                    close=col(OHLC.date_time).dt.hour(),
-                )
-                .filter(col(OHLC.date_time) < datetime(2021, 1, 1, tzinfo=UTC))
-            )
-
-            writer.write(DataFrame[OHLC](polar_frame))
+from baikal.common.dataset.parquet import ParquetTimeSeriesPartition
+from baikal.common.models import OHLC
+from tests.dataset.util import write_parquet_sample
 
 
 def test_parquest_time_series_writer(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter(
-        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
-    )
-
-    _write_parquet_sample(writer)
+    write_parquet_sample(tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH)
 
     loaded = scan_parquet(
         tmp_path / "parquet-data" / "**" / "*.parquet",
@@ -78,11 +35,7 @@ def test_parquest_time_series_writer(tmp_path: Path) -> None:
 
 
 def test_parquet_writer_metadata(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter(
-        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
-    )
-
-    _write_parquet_sample(writer)
+    write_parquet_sample(tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH)
 
     first_parquet = next((tmp_path / "parquet-data").rglob("**/*.parquet"))
     metadata = read_metadata(first_parquet)
@@ -99,11 +52,8 @@ def test_parquet_writer_metadata(tmp_path: Path) -> None:
 
 
 def test_parquet_writer_global_metadata(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter(
-        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
-    )
+    write_parquet_sample(tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH)
 
-    _write_parquet_sample(writer)
     metadata = read_metadata(tmp_path / "parquet-data" / "_metadata")
     print(metadata)
 
@@ -130,24 +80,3 @@ def test_parquet_writer_global_metadata(tmp_path: Path) -> None:
 
     max_date_time = last_statistics.max
     assert datetime(2020, 12, 31, 23, 59, tzinfo=UTC) == max_date_time
-
-
-def test_mmap_time_series_reader(tmp_path: Path) -> None:
-    writer = ParquetTimeSeriesWriter(
-        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
-    )
-
-    _write_parquet_sample(writer)
-
-    # schema = arrow_schema(
-    #     cast(
-    #         Mapping[str, DataType],
-    #         {
-    #             OHLC.date_time: timestamp("us"),
-    #             OHLC.open: float64(),
-    #             OHLC.high: float64(),
-    #             OHLC.low: float64(),
-    #             OHLC.close: float64(),
-    #         },
-    #     )
-    # )

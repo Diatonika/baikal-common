@@ -1,6 +1,6 @@
 from polars import Datetime, Float64, Int64
 
-from baikal.common.trade.models import TradeModel
+from baikal.common.models import TradeModel
 
 
 def test_column_names() -> None:

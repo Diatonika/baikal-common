@@ -13,8 +13,10 @@ from pyarrow.parquet import (
     write_to_dataset,
 )
 
-from baikal.common.trade.models import TimeSeries
-from baikal.common.trade.parquet.time_series_partition import ParquetTimeSeriesPartition
+from baikal.common.dataset.parquet.time_series_partition import (
+    ParquetTimeSeriesPartition,
+)
+from baikal.common.models import TimeSeries
 
 
 class ParquetTimeSeriesWriter:
@@ -73,6 +75,7 @@ class ParquetTimeSeriesWriter:
             self._group.append(group_chunk)
 
     def __enter__(self) -> Self:
+        self._file_system.create_dir(self._root.as_posix())
         return self
 
     def __exit__(

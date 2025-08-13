@@ -1,2 +1,0 @@
-class ParquetDatasetException(Exception):
-    pass

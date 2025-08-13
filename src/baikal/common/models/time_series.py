@@ -3,7 +3,7 @@ from typing import Annotated
 from pandera.typing.polars import Series
 from polars import Datetime
 
-from baikal.common.trade.models.trade_model import TradeModel
+from baikal.common.models.trade_model import TradeModel
 
 
 class TimeSeries(TradeModel):

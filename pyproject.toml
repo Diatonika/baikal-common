@@ -16,6 +16,7 @@ dependencies = [
     "pandera[pandas, polars] (>= 0.24, < 1.0)",
     "polars (>= 1.0, < 2.0)",
     "pyarrow (>= 20.0, < 21.0)",
+    "pydantic (>= 2.0, < 3.0)",
     "rich (>= 13.0, < 14.0)",
     "tzdata (>= 2025.0)"
 ]
@@ -86,7 +87,7 @@ select = [
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
-known-first-party = ["baikal.*"]
+known-first-party = ["baikal.*", "tests.*"]
 lines-between-types = 1
 
 [tool.mypy]
