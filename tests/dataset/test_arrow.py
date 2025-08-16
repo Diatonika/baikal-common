@@ -2,7 +2,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from random import shuffle
 
-from pyarrow import OSFile, ipc
+from pyarrow import OSFile, Table as ArrowTable, ipc
 
 from baikal.common.dataset.arrow import (
     ArrowDataset,
@@ -13,6 +13,44 @@ from baikal.common.dataset.arrow import (
 from baikal.common.dataset.parquet import ParquetTimeSeriesPartition
 from baikal.common.models import OHLC
 from tests.dataset.util import write_parquet_sample
+
+# region Utility
+
+
+def _default_memory_map_dataset(tmp_path: Path) -> ArrowDataset:
+    _ = write_parquet_sample(
+        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
+    )
+
+    return memory_map_dataset(
+        from_parquet_dataset(tmp_path / "parquet-data", tmp_path / "arrow-data")
+    )
+
+
+def _default_memory_map_dataset_asserts(dataset: ArrowDataset) -> None:
+    assert len(dataset.batches)
+
+    assert min(batch.metadata.min for batch in dataset.batches) == datetime(
+        2020, 1, 1, tzinfo=UTC
+    )
+
+    assert max(batch.metadata.max for batch in dataset.batches) == datetime(
+        2020, 12, 31, 23, 59, tzinfo=UTC
+    )
+
+
+def _assert_arrow_dataset_slice(
+    table: ArrowTable, column: str, expected_min: datetime, expected_max: datetime
+) -> None:
+    python_column = table.column(column).to_pylist()
+    expected_length = (expected_max - expected_min).total_seconds() // 60 + 1
+
+    assert python_column[0] == expected_min
+    assert python_column[-1] == expected_max
+    assert len(python_column) == expected_length
+
+
+# endregion
 
 
 def test_from_parquet_dataset(tmp_path: Path) -> None:
@@ -40,18 +78,6 @@ def test_from_parquet_dataset(tmp_path: Path) -> None:
                 validated_metadata = RecordBatchMetaData.model_validate(metadata)
                 assert validated_metadata.sort_column == OHLC.date_time
                 assert validated_metadata.sort_order == "ascending"
-
-
-def _default_memory_map_dataset_asserts(dataset: ArrowDataset) -> None:
-    assert len(dataset.batches)
-
-    assert min(batch.metadata.min for batch in dataset.batches) == datetime(
-        2020, 1, 1, tzinfo=UTC
-    )
-
-    assert max(batch.metadata.max for batch in dataset.batches) == datetime(
-        2020, 12, 31, 23, 59, tzinfo=UTC
-    )
 
 
 def test_memory_map_dataset_from_files(tmp_path: Path) -> None:
@@ -98,3 +124,71 @@ def test_memory_map_dataset_chunk_order(tmp_path: Path) -> None:
     for batch in dataset.batches:
         assert batch.metadata.min == batch_max + timedelta(minutes=1)
         batch_max = batch.metadata.max
+
+
+def test_arrow_dataset_slice_left(tmp_path: Path) -> None:
+    dataset = _default_memory_map_dataset(tmp_path)
+
+    sliced = dataset.slice(
+        datetime(2020, 5, 14, 12, 30, tzinfo=UTC),
+        datetime(2020, 7, 30, 18, 45, tzinfo=UTC),
+        "left",
+    )
+
+    _assert_arrow_dataset_slice(
+        sliced,
+        OHLC.date_time,
+        datetime(2020, 5, 14, 12, 30, tzinfo=UTC),
+        datetime(2020, 7, 30, 18, 44, tzinfo=UTC),
+    )
+
+
+def test_arrow_dataset_slice_right(tmp_path: Path) -> None:
+    dataset = _default_memory_map_dataset(tmp_path)
+
+    sliced = dataset.slice(
+        datetime(2020, 3, 1, 5, 18, tzinfo=UTC),
+        datetime(2020, 9, 21, 14, 53, tzinfo=UTC),
+        "right",
+    )
+
+    _assert_arrow_dataset_slice(
+        sliced,
+        OHLC.date_time,
+        datetime(2020, 3, 1, 5, 19, tzinfo=UTC),
+        datetime(2020, 9, 21, 14, 53, tzinfo=UTC),
+    )
+
+
+def test_arrow_dataset_slice_both(tmp_path: Path) -> None:
+    dataset = _default_memory_map_dataset(tmp_path)
+
+    sliced = dataset.slice(
+        datetime(2020, 1, 13, 19, 15, tzinfo=UTC),
+        datetime(2020, 12, 30, 4, 30, tzinfo=UTC),
+        "both",
+    )
+
+    _assert_arrow_dataset_slice(
+        sliced,
+        OHLC.date_time,
+        datetime(2020, 1, 13, 19, 15, tzinfo=UTC),
+        datetime(2020, 12, 30, 4, 30, tzinfo=UTC),
+    )
+
+
+def test_arrow_dataset_slice_none(tmp_path: Path) -> None:
+    dataset = _default_memory_map_dataset(tmp_path)
+
+    sliced = dataset.slice(
+        datetime(2020, 2, 1, 0, 0, tzinfo=UTC),
+        datetime(2020, 2, 1, 0, 2, tzinfo=UTC),
+        "none",
+    )
+
+    _assert_arrow_dataset_slice(
+        sliced,
+        OHLC.date_time,
+        datetime(2020, 2, 1, 0, 1, tzinfo=UTC),
+        datetime(2020, 2, 1, 0, 1, tzinfo=UTC),
+    )

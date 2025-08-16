@@ -65,6 +65,7 @@ url = "https://pypi.fury.io/zitrasa/"
 click = "^8.0"
 python-semantic-release = "^9.0"
 rust-just = "^1.0"
+yappi = "^1.6"
 
 [tool.poetry.group.lint.dependencies]
 mypy = "^1.0"

@@ -693,14 +693,14 @@ xml = ["lxml (>=4.9.2)"]
 
 [[package]]
 name = "pandera"
-version = "0.25.0"
+version = "0.26.0"
 description = "A light-weight and flexible data validation and testing tool for statistical data objects."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "pandera-0.25.0-py3-none-any.whl", hash = "sha256:365a555accc46404466641203e297722d424d74a1315f077ab899e1344f82303"},
-    {file = "pandera-0.25.0.tar.gz", hash = "sha256:af3bbaa163672c91b83d59d70715f25c4134dbccfc8bc89a642a2f0e23db951e"},
+    {file = "pandera-0.26.0-py3-none-any.whl", hash = "sha256:85e4ab058e8e6c1f13f364450e080fcb52c8320bb40ca952342ac8709d1a7a4e"},
+    {file = "pandera-0.26.0.tar.gz", hash = "sha256:37dbca1e53d12f70e576c45d886a31e454b48990c40d92c3466c26d28141b07b"},
 ]
 
 [package.dependencies]
@@ -760,19 +760,19 @@ testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "polars"
-version = "1.32.2"
+version = "1.32.3"
 description = "Blazingly fast DataFrame library"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 files = [
-    {file = "polars-1.32.2-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:f21da6a5210898ec800b7e9e667fb53eb9161b7ceb812ee6555ff5661a00e517"},
-    {file = "polars-1.32.2-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:d3f4e061312ef6c2a907378ce407a6132734fe1a13f261a1984a1a9ca2f6febc"},
-    {file = "polars-1.32.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a711a750cfc19f1f883d2b46895dd698abf4d446ca41c3bf510ced0ff1178057"},
-    {file = "polars-1.32.2-cp39-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:d1c53a828eedc215fb0dabc7cef02c6f4ad042157512ddb99840fd42b8da1e8a"},
-    {file = "polars-1.32.2-cp39-abi3-win_amd64.whl", hash = "sha256:5e1660a584e89e1d60cd89984feca38a695e491a966581fefe8be99c230ea154"},
-    {file = "polars-1.32.2-cp39-abi3-win_arm64.whl", hash = "sha256:cd390364f6f3927474bd0aed255103195b9d2b3eef0f0c5bb429db5e6311615e"},
-    {file = "polars-1.32.2.tar.gz", hash = "sha256:b4c5cefc7cf7a2461f8800cf2c09976c47cb1fd959c6ef3024d5618b497f05d3"},
+    {file = "polars-1.32.3-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:c7c472ea1d50a5104079cb64e34f78f85774bcc69b875ba8daf21233f4c70d42"},
+    {file = "polars-1.32.3-cp39-abi3-macosx_11_0_arm64.whl", hash = "sha256:fd87275f0cc795e72a2030b58293198cfa748d4b009cf52218e27db5397ed07f"},
+    {file = "polars-1.32.3-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c9a9b9668ef310e5a77a7e7daa9c753874779c8da52e93f654bfd7953eb4b60b"},
+    {file = "polars-1.32.3-cp39-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:c8f5d2f43b80b68e39bfaa2948ce632563633466576f12e74e8560d6481f5851"},
+    {file = "polars-1.32.3-cp39-abi3-win_amd64.whl", hash = "sha256:db56a7cb4898e173d62634e182f74bdff744c62be5470e0fe20df8d10f659af7"},
+    {file = "polars-1.32.3-cp39-abi3-win_arm64.whl", hash = "sha256:a2e3f87c60f54eefe67b1bebd3105918d84df0fd6d59cc6b870c2f16d2d26ca1"},
+    {file = "polars-1.32.3.tar.gz", hash = "sha256:57c500dc1b5cba49b0589034478db031815f3d57a20cb830b05ecee1a9ba56b1"},
 ]
 
 [package.extras]
@@ -1493,7 +1493,77 @@ files = [
     {file = "wrapt-1.17.3.tar.gz", hash = "sha256:f66eb08feaa410fe4eebd17f2a2c8e2e46d3476e9f8c783daa8e09e0faa666d0"},
 ]
 
+[[package]]
+name = "yappi"
+version = "1.6.10"
+description = "Yet Another Python Profiler"
+optional = false
+python-versions = ">=3.6"
+groups = ["dev"]
+files = [
+    {file = "yappi-1.6.10-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:1f03127742746ec4cf7e422b08212daf094505ab7f5d725d7b273ed3c475c3d9"},
+    {file = "yappi-1.6.10-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7bbafb779c3f90edd09fd34733859226785618adee3179d5949dbba2e90f550a"},
+    {file = "yappi-1.6.10-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f326045442f7d63aa54dc4a18eda358b186af3316ae52619dd606058fb3b4182"},
+    {file = "yappi-1.6.10-cp310-cp310-musllinux_1_2_i686.whl", hash = "sha256:737e3cb6bb05f326eb63000663a4dc08dc08cc9827f7634445250c9610e5e717"},
+    {file = "yappi-1.6.10-cp310-cp310-musllinux_1_2_x86_64.whl", hash = "sha256:7c01a2bd8abc3b6d33ae60dea26f97e2372e0087a747289bbab0fe67c8ac8925"},
+    {file = "yappi-1.6.10-cp310-cp310-win32.whl", hash = "sha256:cf117a9f733e0d8386bc8c454c11b275999c4bf559d742cbb8b60ace1d813f23"},
+    {file = "yappi-1.6.10-cp310-cp310-win_amd64.whl", hash = "sha256:402252d543e47464707ea5d7e4a63c7e77ce81cb58b8559c8883e67ae483911c"},
+    {file = "yappi-1.6.10-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:20b8289e8cca781e948f72d86c03b308e077abeec53ec60080f77319041e0511"},
+    {file = "yappi-1.6.10-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:4bc9a30b162cb0e13d6400476fa05c272992bd359592e9bba1a570878d9e155c"},
+    {file = "yappi-1.6.10-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:40aa421ea7078795ed2f0e6bae3f8f64f6cd5019c885a12c613b44dd1fc598b4"},
+    {file = "yappi-1.6.10-cp311-cp311-musllinux_1_2_i686.whl", hash = "sha256:0d62741c0ac883067e40481ab89ddd9e004292dbd22ac5992cf45745bf28ccc3"},
+    {file = "yappi-1.6.10-cp311-cp311-musllinux_1_2_x86_64.whl", hash = "sha256:1cf46ebe43ac95f8736618a5f0ac763c7502a3aa964a1dda083d9e9c1bf07b12"},
+    {file = "yappi-1.6.10-cp311-cp311-win32.whl", hash = "sha256:ff3688aa99b08ee10ced478b7255ac03865a8b5c0677482056acfe4d4f56e45f"},
+    {file = "yappi-1.6.10-cp311-cp311-win_amd64.whl", hash = "sha256:4bd4f820e84d823724b8de4bf6857025e9e6c953978dd32485e054cf7de0eda7"},
+    {file = "yappi-1.6.10-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:32c6d928604d7a236090bc36d324f309fe8344c91123bb84e37c43f6677adddc"},
+    {file = "yappi-1.6.10-cp312-cp312-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:9683c40de7e4ddff225068032cd97a6d928e4beddd9c7cf6515325be8ac28036"},
+    {file = "yappi-1.6.10-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:733a212014f2b44673ed62be53b3d4dd458844cd2008ba107f27a3293e42f43a"},
+    {file = "yappi-1.6.10-cp312-cp312-musllinux_1_2_i686.whl", hash = "sha256:7d80938e566ac6329daa3b036fdf7bd34488010efcf0a65169a44603878daa4e"},
+    {file = "yappi-1.6.10-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:01705971b728a4f95829b723d08883c7623ec275f4066f4048b28dc0151fe0af"},
+    {file = "yappi-1.6.10-cp312-cp312-win32.whl", hash = "sha256:8dd13a430b046e2921ddf63d992da97968724b41a03e68292f06a2afa11c9d6e"},
+    {file = "yappi-1.6.10-cp312-cp312-win_amd64.whl", hash = "sha256:a50eb3aec893c40554f8f811d3341af266d844e7759f7f7abfcdba2744885ea3"},
+    {file = "yappi-1.6.10-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:944df9ebc6b283d6591a6b5f4c586d0eb9c6131c915f1b20fb36127ade83720d"},
+    {file = "yappi-1.6.10-cp313-cp313-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3736ea6458edbabd96918d88e2963594823e4ab4c58d62a52ef81f6b5839ec19"},
+    {file = "yappi-1.6.10-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f27bbc3311a3662231cff395d38061683fac5c538f3bab6796ff05511d2cce43"},
+    {file = "yappi-1.6.10-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:354cf94d659302b421b13c03487f2f1bce969b97b85fba88afb11f2ef83c35f3"},
+    {file = "yappi-1.6.10-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:1d82839835ae2c291b88fb56d82f80c88c00d76df29f3c1ed050db73b553bef0"},
+    {file = "yappi-1.6.10-cp313-cp313-win32.whl", hash = "sha256:fc84074575afcc5a2a712e132c0b51541b7434b3099be99f573964ef3b6064a8"},
+    {file = "yappi-1.6.10-cp313-cp313-win_amd64.whl", hash = "sha256:334b31dfefae02bc28b7cd50953aaaae3292e40c15efb613792e4a587281a161"},
+    {file = "yappi-1.6.10-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:f0b4bbdbaeda9ae84364a26cef6ccc512c44f3131a0b074f8892c5147f2e3bea"},
+    {file = "yappi-1.6.10-cp36-cp36m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:e9b3e1ce82b2bf30eeab19df7544d2caf5d7dc06bd7196ee2249a94e2081a5ae"},
+    {file = "yappi-1.6.10-cp36-cp36m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3d95ce88d0b533a44a6d9521b983e3412e5c50d7fd152f2155764effad4ecf7f"},
+    {file = "yappi-1.6.10-cp36-cp36m-musllinux_1_2_i686.whl", hash = "sha256:ce9b908e99368c14bcdc1e198fc2ffe0cf42191ebfcec5458d10c4335f2abaf6"},
+    {file = "yappi-1.6.10-cp36-cp36m-musllinux_1_2_x86_64.whl", hash = "sha256:307d681dd0cdaa7986e3b22115e41597f92778db03ba9be5096cfcb13929c5e9"},
+    {file = "yappi-1.6.10-cp36-cp36m-win32.whl", hash = "sha256:de7aeaae96ce5d727d2d3f905dfbdbb512c4be1f7ef5178facac0835da63738a"},
+    {file = "yappi-1.6.10-cp36-cp36m-win_amd64.whl", hash = "sha256:e234dfd385fefaecc640235448d912e35f6a1400bc73be723744e901f2432527"},
+    {file = "yappi-1.6.10-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:215964abb3818124bc638cf5456ca311e70188146afb30336cced0fc4ef42f5b"},
+    {file = "yappi-1.6.10-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3752ab9480f28709427d6077d220d963ed7caa84e18fd0f404022f4076850b0e"},
+    {file = "yappi-1.6.10-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f1305d50e805358937b022d455a17127a7ea2eb8eaf7595e0d06b0760f4bcc58"},
+    {file = "yappi-1.6.10-cp37-cp37m-musllinux_1_2_i686.whl", hash = "sha256:c713b660a23f4f8a33ea08a168f9f94d92b0383683e8ae3e9467587b5a8a0eae"},
+    {file = "yappi-1.6.10-cp37-cp37m-musllinux_1_2_x86_64.whl", hash = "sha256:3aa33acd51ba1b5d81e5d6ec305d144531d215635b9dfd8ee1d57688c77725af"},
+    {file = "yappi-1.6.10-cp37-cp37m-win32.whl", hash = "sha256:228ab550d53b5e37d618b42f5085e504376963b48f867d45d0fdc8a1e0c811d2"},
+    {file = "yappi-1.6.10-cp37-cp37m-win_amd64.whl", hash = "sha256:2246e57e1ab7d11a184042fe5726fbffca8c1a59c5eb01d1a043741403bf844d"},
+    {file = "yappi-1.6.10-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:b1795ea62ee9a39c1cff01a2c477b8bd5b1ca95c17d258efbf770b73eb62b2b8"},
+    {file = "yappi-1.6.10-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2ba5c27a82cdd84e5102b789ab5061431944e3dee27e0970c3167b3bce78b262"},
+    {file = "yappi-1.6.10-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d229ab4f2711aeed440037d9007db79d776e79c552ecde23b0b68591fa7ecccf"},
+    {file = "yappi-1.6.10-cp38-cp38-musllinux_1_2_i686.whl", hash = "sha256:8a4bd5dd1c50e81440c712e6f43ac682768690d2dd0307665910a52db2d69175"},
+    {file = "yappi-1.6.10-cp38-cp38-musllinux_1_2_x86_64.whl", hash = "sha256:49f1f8b16d6f42a79a06ae5268f39e71de3648d6797471dc71d80d91be4a6484"},
+    {file = "yappi-1.6.10-cp38-cp38-win32.whl", hash = "sha256:dec8fb0125fe636f9218ec3ce022d8435299beadfee1def82ee75e11bce38ebd"},
+    {file = "yappi-1.6.10-cp38-cp38-win_amd64.whl", hash = "sha256:6822f33ae4474eb9ffc8865e64cba70daef23832be36b4d63d1d8dfd890101cf"},
+    {file = "yappi-1.6.10-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:198831ccab42295ae2be265d422fdc0d9ccc8ae3e074e7c70fb58731e8181221"},
+    {file = "yappi-1.6.10-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:721a67aa9f110d509e2729cb145b79b87fe28d42e253476a524fa781aff41c3c"},
+    {file = "yappi-1.6.10-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:e2e08a11f7e6b49ef09659506ac3bf0484881d6f634c6026c6bcbe3d345ee7c2"},
+    {file = "yappi-1.6.10-cp39-cp39-musllinux_1_2_i686.whl", hash = "sha256:ba1cd02fd914441d916db2972c3657711b2d7843cdd481e16244dee5870579af"},
+    {file = "yappi-1.6.10-cp39-cp39-musllinux_1_2_x86_64.whl", hash = "sha256:2594ab790a9db37223e7861ec9cdf74d1edf05a78b31a8806ff24abcde668bea"},
+    {file = "yappi-1.6.10-cp39-cp39-win32.whl", hash = "sha256:4efb7ee80a1ac4511e900ebced03aea761ab129269b0d571586a25d3a71e7a35"},
+    {file = "yappi-1.6.10-cp39-cp39-win_amd64.whl", hash = "sha256:f3f833bae26d1046610a08ddb0c968311056d07c8930ab11985e1e38c97cb91e"},
+    {file = "yappi-1.6.10.tar.gz", hash = "sha256:463b822727658937bd95a7d80ca9758605b8cd0014e004e9e520ec9cb4db0c92"},
+]
+
+[package.extras]
+test = ["gevent (>=20.6.2)"]
+
 [metadata]
 lock-version = "2.1"
 python-versions = ">= 3.12, < 4.0"
-content-hash = "f7f88f679963762e8d814deeadbea8f1b714f841a090f3e362861c594da37778"
+content-hash = "73a1a8b4eb9d358eaa12da04de3064ead83eae2c7dee42c1df9f6ac1292221a0"
