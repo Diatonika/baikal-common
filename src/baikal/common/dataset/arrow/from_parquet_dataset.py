@@ -8,7 +8,10 @@ from pyarrow.lib import concat_batches
 from pyarrow.parquet import RowGroupMetaData, SortingColumn
 
 from baikal.common.dataset.arrow.exceptions import InvalidMetadataException
-from baikal.common.dataset.arrow.record_batch_metadata import RecordBatchMetaData
+from baikal.common.dataset.arrow.record_batch_metadata import (
+    RecordBatchMetaData,
+    SortOrder,
+)
 
 
 def from_parquet_dataset(
@@ -95,7 +98,7 @@ def _write_fragment_to(
             min=index_statistic["min"],
             max=index_statistic["max"],
             sort_column=sort_column,
-            sort_order=sort_order,
+            sort_order=SortOrder(sort_order),
         )
 
         writer.write_batch(arrow_batch, arrow_batch_metadata.model_dump(mode="json"))

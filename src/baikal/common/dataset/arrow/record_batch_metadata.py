@@ -1,7 +1,12 @@
 from datetime import datetime
-from typing import Literal
+from enum import StrEnum
 
 from pydantic import BaseModel
+
+
+class SortOrder(StrEnum):
+    ASCENDING = "ascending"
+    DESCENDING = "descending"
 
 
 class RecordBatchMetaData(BaseModel):
@@ -9,4 +14,4 @@ class RecordBatchMetaData(BaseModel):
     max: datetime
 
     sort_column: str
-    sort_order: Literal["ascending", "descending"]
+    sort_order: SortOrder
