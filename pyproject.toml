@@ -91,7 +91,7 @@ select = [
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
-known-first-party = ["baikal.*", "tests.*"]
+known-first-party = ["baikal.*", "benchmarks.*", "tests.*"]
 lines-between-types = 1
 
 [tool.mypy]
@@ -108,5 +108,11 @@ ignore_missing_imports = true
 # Testing Tools
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib", "--tb=short"]
-testpaths = ["tests"]
+addopts = [
+    "--benchmark-group-by=fullfunc",
+    "--benchmark-sort=mean",
+    "--import-mode=importlib",
+    "--tb=short"
+]
+
+testpaths = ["benchmarks", "tests"]
