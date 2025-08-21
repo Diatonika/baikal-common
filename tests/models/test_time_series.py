@@ -5,7 +5,7 @@ import pytest
 from pandera.errors import SchemaError
 from pandera.typing.polars import DataFrame
 
-from baikal.common.trade.models import TimeSeries
+from baikal.common.models import TimeSeries
 
 
 def test_time_series_init() -> None:

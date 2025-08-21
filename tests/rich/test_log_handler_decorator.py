@@ -10,7 +10,7 @@ from baikal.common.rich import RichConsoleStack, with_handler
 def _mock_log_function() -> None:
     logger = logging.getLogger("_mock_function_one")
 
-    with RichConsoleStack.active_console().capture() as capture:
+    with RichConsoleStack.active().capture() as capture:
         logger.error("[mock-style-one] _mock_function_one [/]")
 
     assert "_mock_function_one" in capture.get()

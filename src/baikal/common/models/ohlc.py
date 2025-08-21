@@ -1,6 +1,6 @@
 from polars import Float64
 
-from baikal.common.trade.models.time_series import TimeSeries
+from baikal.common.models.time_series import TimeSeries
 
 
 class OHLC(TimeSeries):

@@ -3,7 +3,7 @@ set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 
 # Directories for Linter & Formatter
 
-source-dirs := "src tests"
+source-dirs := "benchmarks src tests"
 nexus-read-user := env("NEXUS_READ_USER")
 nexus-read-pass := env("NEXUS_READ_PASS")
 
@@ -58,4 +58,8 @@ format-fix: init-lint
 
 [group("test")]
 test-all: init-test
-    poetry run pytest
+    poetry run pytest tests
+
+[group("test")]
+benchmark: init-test
+    poetry run python -m pytest benchmarks
