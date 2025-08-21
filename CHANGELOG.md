@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.15.0 (2025-08-21)
+
+### Features
+
+- **dataset**: Support arrow mmap dataset
+  ([`7de6604`](https://github.com/Diatonika/baikal-common/commit/7de66043a671c5bb0de0b53ec0f319832c59af41))
+
+
 ## v0.14.3 (2025-08-07)
 
 ### Bug Fixes
