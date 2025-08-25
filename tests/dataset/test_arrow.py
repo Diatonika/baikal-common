@@ -2,7 +2,8 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from random import shuffle
 
-from pyarrow import OSFile, Table as ArrowTable, ipc
+from pyarrow import OSFile, Table as ArrowTable, ipc, total_allocated_bytes
+from pyarrow.dataset import dataset as read_dataset
 
 from baikal.common.dataset.arrow import (
     ArrowDataset,
@@ -29,6 +30,7 @@ def _default_memory_map_dataset(tmp_path: Path) -> ArrowDataset:
 
 def _default_memory_map_dataset_asserts(dataset: ArrowDataset) -> None:
     assert len(dataset.batches)
+    assert len(dataset) == 527_040
 
     assert min(batch.metadata.min for batch in dataset.batches) == datetime(
         2020, 1, 1, tzinfo=UTC
@@ -37,6 +39,8 @@ def _default_memory_map_dataset_asserts(dataset: ArrowDataset) -> None:
     assert max(batch.metadata.max for batch in dataset.batches) == datetime(
         2020, 12, 31, 23, 59, tzinfo=UTC
     )
+
+    assert not total_allocated_bytes()
 
 
 def _assert_arrow_dataset_slice(
@@ -106,6 +110,28 @@ def test_memory_map_dataset_from_directory(tmp_path: Path) -> None:
 
     assert dataset.schema == schema
     _default_memory_map_dataset_asserts(dataset)
+
+
+def test_pyarrow_dataset_integration(tmp_path: Path) -> None:
+    _ = write_parquet_sample(
+        tmp_path / "parquet-data", ParquetTimeSeriesPartition.MONTH
+    )
+
+    _ = from_parquet_dataset(tmp_path / "parquet-data", tmp_path / "arrow-data")
+    arrow_dataset = memory_map_dataset(tmp_path / "arrow-data")
+
+    dataset = read_dataset(
+        [meta_batch.batch for meta_batch in arrow_dataset.batches],
+        schema=arrow_dataset.schema,
+    )
+
+    table = dataset.to_table()
+    assert len(table) == 527_040
+
+    sliced = dataset.take([0, 5, 10, 500_000, 527_039])
+    assert len(sliced) == 5
+
+    assert total_allocated_bytes() < 1_024
 
 
 def test_memory_map_dataset_chunk_order(tmp_path: Path) -> None:
