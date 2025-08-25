@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v0.16.0 (2025-08-25)
+
+### Features
+
+- **dataset**: Support integer indexing for arrow dataset
+  ([#14](https://github.com/Diatonika/baikal-common/pull/14),
+  [`cdbfb4e`](https://github.com/Diatonika/baikal-common/commit/cdbfb4e023d7d7094431c1a59fdff8f8a5f9730a))
+
+
 ## v0.15.0 (2025-08-21)
 
 ### Features
