@@ -72,6 +72,14 @@ class ArrowDataset:
 
         return self.schema.empty_table()
 
+    def __len__(self) -> int:
+        return sum(len(meta_batch.batch) for meta_batch in self.batches)
+
+    def to_table(self) -> ArrowTable:
+        return ArrowTable.from_batches(
+            (meta_batch.batch for meta_batch in self.batches), self.schema
+        )
+
 
 # region Private
 
