@@ -62,11 +62,8 @@ url = "https://pypi.fury.io/zitrasa/"
 # Dependency Groups
 
 [tool.poetry.group.dev.dependencies]
-click = "^8.0"
 memray = {version = "^1.0", platform = "linux"}
 pytest-memray = {version = "^1.0", platform = "linux"}
-python-semantic-release = "^9.0"
-rust-just = "^1.0"
 yappi = "^1.6"
 
 [tool.poetry.group.lint.dependencies]
