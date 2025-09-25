@@ -75,7 +75,7 @@ def _write_fragment_to(
     for group, statistic, meta in zip(groups, statistics, metadata, strict=True):
         assert isinstance(meta, RowGroupMetaData)
 
-        keys, nulls = SortingColumn.to_ordering(
+        keys, _ = SortingColumn.to_ordering(
             fragment.physical_schema, tuple(meta.sorting_columns)
         )
 
