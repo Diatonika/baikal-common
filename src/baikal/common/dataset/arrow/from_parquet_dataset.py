@@ -101,7 +101,13 @@ def _write_fragment_to(
             sort_order=SortOrder(sort_order),
         )
 
-        writer.write_batch(arrow_batch, arrow_batch_metadata.model_dump(mode="json"))
+        writer.write_batch(
+            arrow_batch,
+            {
+                key.encode(): value
+                for key, value in arrow_batch_metadata.model_dump(mode="json").items()
+            },
+        )
 
 
 # endregion
