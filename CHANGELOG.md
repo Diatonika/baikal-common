@@ -1,6 +1,51 @@
 # CHANGELOG
 
 
+## v0.17.0 (2025-09-26)
+
+### Build System
+
+- Clean pyproject.toml to remove redundant dependencies
+  ([#16](https://github.com/Diatonika/baikal-common/pull/16),
+  [`aa60007`](https://github.com/Diatonika/baikal-common/commit/aa60007d77a199adbaf6589b933cf49132d482a4))
+
+### Chores
+
+- Improve linting and typing ([#18](https://github.com/Diatonika/baikal-common/pull/18),
+  [`55a5ffb`](https://github.com/Diatonika/baikal-common/commit/55a5ffb4325bd82ed017789419048af035f628bb))
+
+* chore: fix pylance lint issue
+
+* chore: improve mypy linting using pydantic plugin
+
+- **vs-code**: Support vs code editor ([#17](https://github.com/Diatonika/baikal-common/pull/17),
+  [`6d6c42f`](https://github.com/Diatonika/baikal-common/commit/6d6c42f65b3204bd6bc0d0bb063336131d758356))
+
+* chore(vs-code): support vs code editor
+
+* chore(vs-code): add newlines in setting files
+
+### Features
+
+- **dataset**: Introduce polar support and flexible arrow metadata
+  ([#19](https://github.com/Diatonika/baikal-common/pull/19),
+  [`5c6a6ce`](https://github.com/Diatonika/baikal-common/commit/5c6a6ce58155450be08f2be22ca72a1647b37e51))
+
+* chore: delete unaccessed variable
+
+* feat(dataset)!: introduce polar support and flexible arrow metadata
+
+### Testing
+
+- **dataset**: Increase tests and benchmarks coverage for arrow memory mapped dataset
+  ([#15](https://github.com/Diatonika/baikal-common/pull/15),
+  [`1fefaf6`](https://github.com/Diatonika/baikal-common/commit/1fefaf69a1714dcb4837bbcb9674d39c1eefc317))
+
+* test(dataset): add memory mapped dataset pyarrow zero-copy integration test
+
+* test(dataset): add benchmarks for indexing and index slicing for arrow memory mapped dataset
+
+
 ## v0.16.0 (2025-08-25)
 
 ### Features
