@@ -1,7 +1,8 @@
-from collections.abc import Iterable
+from collections.abc import Collection, Iterable
 from datetime import datetime
-from typing import Literal, assert_never
+from typing import Any, Literal, assert_never
 
+from attrs import frozen
 from pyarrow import (
     RecordBatch,
     Schema as ArrowSchema,
@@ -15,15 +16,21 @@ from baikal.common.dataset.arrow.batch_with_metadata import BatchWithMetaData
 from baikal.common.dataset.arrow.exceptions import (
     SchemaValidationException,
 )
+from baikal.common.dataset.arrow.time_series_metadata import TimeSeriesMetaData
 
 
-class ArrowDataset:
+@frozen
+class TimeSeriesSlicer:
     schema: ArrowSchema
-    batches: tuple[BatchWithMetaData, ...]
+    batches: tuple[BatchWithMetaData[TimeSeriesMetaData], ...]
 
-    def __init__(self, batches: Iterable[BatchWithMetaData]) -> None:
-        self.schema = _validate_schema(batches)
-        self.batches = _sort_batches(batches)
+    @staticmethod
+    def from_batches(
+        batches: Collection[BatchWithMetaData[TimeSeriesMetaData]],
+    ) -> "TimeSeriesSlicer":
+        return TimeSeriesSlicer(
+            schema=_validate_schema(batches), batches=tuple(batches)
+        )
 
     def slice(
         self,
@@ -41,7 +48,7 @@ class ArrowDataset:
                 continue
 
             if batch.metadata.min >= start and batch.metadata.max <= end:
-                slices.append(batch.batch)
+                slices.append(batch.data)
                 continue
 
             lower_bound: Expression
@@ -62,7 +69,7 @@ class ArrowDataset:
                 case _:
                     assert_never(how)
 
-            filtered = batch.batch.filter(lower_bound & upper_bound)
+            filtered = batch.data.filter(lower_bound & upper_bound)
             assert isinstance(filtered, RecordBatch)
 
             slices.append(filtered)
@@ -72,36 +79,19 @@ class ArrowDataset:
 
         return self.schema.empty_table()
 
-    def __len__(self) -> int:
-        return sum(len(meta_batch.batch) for meta_batch in self.batches)
-
-    def to_table(self) -> ArrowTable:
-        return ArrowTable.from_batches(
-            (meta_batch.batch for meta_batch in self.batches), self.schema
-        )
-
 
 # region Private
 
 
-def _validate_schema(batches: Iterable[BatchWithMetaData]) -> ArrowSchema:
+def _validate_schema(batches: Iterable[BatchWithMetaData[Any]]) -> ArrowSchema:
     schema: ArrowSchema | None = None
     for batch in batches:
-        schema = schema or batch.batch.schema
-        if not schema.equals(batch.batch.schema):
-            message = f"Ambiguous schema: {schema} and {batch.batch.schema}."
+        schema = schema or batch.data.schema
+        if not schema.equals(batch.data.schema):
+            message = f"Ambiguous schema: {schema} and {batch.data.schema}."
             raise SchemaValidationException(message)
 
     return schema or create_schema({})
-
-
-def _sort_batches(
-    batches: Iterable[BatchWithMetaData],
-) -> tuple[BatchWithMetaData, ...]:
-    def _sort_by(value: BatchWithMetaData) -> datetime:
-        return value.metadata.min
-
-    return tuple(sorted(batches, key=_sort_by))
 
 
 # endregion

@@ -1,10 +1,9 @@
 from attrs import define
 from pyarrow import RecordBatch
-
-from baikal.common.dataset.arrow.record_batch_metadata import RecordBatchMetaData
+from pydantic import BaseModel
 
 
 @define
-class BatchWithMetaData:
-    batch: RecordBatch
-    metadata: RecordBatchMetaData
+class BatchWithMetaData[T: BaseModel]:
+    data: RecordBatch
+    metadata: T
