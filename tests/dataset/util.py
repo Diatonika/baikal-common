@@ -1,7 +1,12 @@
-from collections.abc import Mapping
+import os
+
+from collections.abc import Generator, Mapping
+from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
+
+import psutil
 
 from pandera.typing.polars import DataFrame
 from polars import DataFrame as PolarDataFrame, col, datetime_range
@@ -64,7 +69,7 @@ def write_parquet_sample(
         cast(
             Mapping[str, DataType],
             {
-                OHLC.date_time: timestamp("us", UTC),
+                OHLC.date_time: timestamp("us", "UTC"),
                 OHLC.open: float64(),
                 OHLC.high: float64(),
                 OHLC.low: float64(),
@@ -72,3 +77,22 @@ def write_parquet_sample(
             },
         )
     )
+
+
+@contextmanager
+def assert_memory_usage(
+    rss: int | None, vms: int | None = None
+) -> Generator[None, Any, None]:
+    process = psutil.Process(os.getpid())
+    memory_before = process.memory_info()
+
+    try:
+        yield
+    finally:
+        memory_after = process.memory_info()
+
+        if rss is not None:
+            assert memory_after.rss - memory_before.rss <= rss
+
+        if vms is not None:
+            assert memory_after.vms - memory_before.vms <= vms

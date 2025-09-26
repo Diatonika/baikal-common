@@ -1,7 +1,7 @@
 from datetime import datetime
 from enum import StrEnum
 
-from pydantic import BaseModel
+from baikal.common.models.pydantic import ExtraAllowModel
 
 
 class SortOrder(StrEnum):
@@ -9,7 +9,7 @@ class SortOrder(StrEnum):
     DESCENDING = "descending"
 
 
-class RecordBatchMetaData(BaseModel):
+class TimeSeriesMetaData(ExtraAllowModel):
     min: datetime
     max: datetime
 
